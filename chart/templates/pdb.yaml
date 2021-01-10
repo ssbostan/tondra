@@ -1,0 +1,9 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  minAvailable: 100%
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Release.Name }}

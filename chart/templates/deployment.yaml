@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-{{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              port: 8080
+              path: /livez
+          readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              port: 8080
+              path: /readyz
+          ports:
+            - name: http
+              containerPort: 8080
