@@ -17,12 +17,12 @@ spec:
           image: {{ .Values.image }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           livenessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: 3
             httpGet:
               port: 8080
               path: /livez
           readinessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: 3
             httpGet:
               port: 8080
               path: /readyz
