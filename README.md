@@ -30,6 +30,8 @@ kubectl create namespace devel
 source initdev
 skaffold dev --port-forward=true
 curl localhost:8080/appinfo
+
+{"appVersion":"v1.0.0","gitCommit":"5d21d166d930791c6a3907fee18852d0799d674b"}
 ```
 
 ### Step 3: Production
