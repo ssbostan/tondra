@@ -1,0 +1,33 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: tondra
+build:
+  artifacts:
+    - image: ssbostan/tondra
+      docker:
+        buildArgs:
+          PYTHON_VERSION: "{{ .PYTHON_VERSION }}"
+          APP_VERSION: "{{ .APP_VERSION }}"
+          APP_LCOMMIT: "{{ .APP_LCOMMIT }}"
+  tagPolicy:
+    gitCommit:
+      variant: Tags
+  local:
+    push: true
+deploy:
+  helm:
+    releases:
+      - name: tondra-devel
+        chartPath: ./chart
+        artifactOverrides:
+          image: ssbostan/tondra
+        setValues:
+          imagePullPolicy: Always
+        namespace: devel
+portForward:
+  - resourceType: Service
+    resourceName: tondra-devel
+    namespace: devel
+    port: 8080
+    localPort: 8080
