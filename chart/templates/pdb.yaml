@@ -2,8 +2,12 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
 spec:
   minAvailable: 100%
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Release.Name }}
+      app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+      app.kubernetes.io/version: "{{ .Chart.AppVersion }}"

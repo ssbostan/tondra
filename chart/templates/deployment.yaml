@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Release.Name }}
+      app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+      app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Release.Name }}
+        app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+        app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -18,11 +23,13 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           livenessProbe:
             initialDelaySeconds: 3
+            periodSeconds: 3
             httpGet:
               port: 8080
               path: /livez
           readinessProbe:
-            initialDelaySeconds: 3
+            initialDelaySeconds: 5
+            periodSeconds: 2
             httpGet:
               port: 8080
               path: /readyz

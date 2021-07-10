@@ -2,10 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
 spec:
   type: {{ .Values.serviceType }}
   selector:
-    app: {{ .Chart.Name }}-{{ .Release.Name }}
+    app.kubernetes.io/name: {{ .Chart.Name }}-{{ .Release.Name }}
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
   ports:
     - name: http
       appProtocol: http
