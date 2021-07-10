@@ -1,4 +1,7 @@
 #!/bin/bash
+
 export PYTHON_VERSION=alpine
 export APP_VERSION=$(git describe --tags)
 export APP_LCOMMIT=$(git rev-parse HEAD)
+
+skaffold dev --port-forward=true
