@@ -1,13 +1,13 @@
 ARG PYTHON_VERSION
 FROM python:$PYTHON_VERSION
 
-ARG APP_VERSION
-ARG APP_LCOMMIT
-
 WORKDIR /opt/app
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+
+ARG APP_VERSION
+ARG APP_LCOMMIT
 
 RUN echo "$APP_VERSION:$APP_LCOMMIT" > .appinfo
 
