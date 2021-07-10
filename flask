@@ -1,0 +1,8 @@
+#!/bin/bash
+
+APP_VERSION=$(git describe --tags)
+APP_LCOMMIT=$(git rev-parse HEAD)
+
+echo "$APP_VERSION:$APP_LCOMMIT" > .appinfo
+
+flask run
