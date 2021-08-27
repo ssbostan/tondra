@@ -1,5 +1,7 @@
 # tondra
 
+![Visits Badge](https://badges.pufler.dev/visits/ssbostan/tondra)
+
 A brief example of Kubernetes based Agile-development process with [Skaffold](https://github.com/GoogleContainerTools/skaffold).
 
 With a Zero-downtime and rolling update approach that achieved from Kubernetes features.
