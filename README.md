@@ -1,6 +1,10 @@
 # tondra
 
 ![Visits Badge](https://badges.pufler.dev/visits/ssbostan/tondra)
+[![GitHub license](https://img.shields.io/github/license/ssbostan/tondra)](https://github.com/ssbostan/tondra/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/ssbostan/tondra)](https://github.com/ssbostan/tondra/stargazers)
+![Twitter Follow](https://img.shields.io/twitter/follow/b9t_ir?style=social)
+![LinkedIn Follow](https://shields.io/badge/style-ssbostan-black?logo=linkedin&label=LinkedIn&link=https://www.linkedin.com/in/ssbostan)
 
 A brief example of Kubernetes based Agile-development process with [Skaffold](https://github.com/GoogleContainerTools/skaffold).
 
