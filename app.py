@@ -6,6 +6,7 @@
 from os import getcwd
 from flask import Flask, url_for
 from random import randrange
+import socket
 
 app = Flask(__name__)
 
@@ -18,6 +19,21 @@ RANDOM_TARGET_POINT = randrange(100, 500)
 
 with open(getcwd() + "/.appinfo") as f:
   APP_INFO = f.read().split(":")
+
+
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.settimeout(0)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
 
 @app.before_request
 def compute_request():
@@ -33,6 +49,7 @@ def index():
     <body>
         <div id="main">
             <h1>Available endpoints:</h1>
+            <p1>IP: {get_ip()}</p1>
             <ul>
                 <li><a href="{url_for('appinfo')}">/appinfo</a></li>
                 <li><a href="{url_for('livez')}">/livez</a></li>
